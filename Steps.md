@@ -1,4 +1,6 @@
-# How to use fire-base !?
+# How to use google fire-base !?
+
+         * INITIAL SETUP *
 
 1. Visit: console.firebase.google.com .
 
@@ -13,6 +15,8 @@
 6. DANGEROUS : get firebase config and put it in Firebsde.js .
 
 7. Export analytics from firebase.js .
+
+        * SETUP PROVIDER *
 
 8. create a auth using getAuth from firebse by using app from Firebase.js .
 
