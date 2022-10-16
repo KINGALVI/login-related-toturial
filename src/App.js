@@ -1,5 +1,5 @@
 import './App.css';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import app from './Firebase/Firebase';
 import { useState } from 'react';
 
@@ -8,24 +8,37 @@ const auth = getAuth(app);
 function App() {
 
   const [user, setUser] = useState({})
-  const Provider = new GoogleAuthProvider();
+  const GoogleProvider = new GoogleAuthProvider();
+
+  const GithubProvider = new GithubAuthProvider();
 
   const HandeleGoogleSignIn = () => {
-    signInWithPopup(auth, Provider)
+    signInWithPopup(auth, GoogleProvider)
       .then(result => {
         const user = result.user;
         setUser(user);
         console.log(user)
       })
       .catch(error => {
-        console.log('Error:', error);
+        console.log('Error : ', error);
       })
   }
 
-  const HandleGoogleSignOut = () => {
+  const HandelGithubSignIn = () => {
+    signInWithPopup(auth, GithubProvider)
+      .then(result => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+      })
+
+      .catch(error => { console.log('Error : ', error) });
+  }
+
+  const HandelSignOut = () => {
     signOut(auth)
       .then(() => {
-        setUser({})
+        setUser({});
       })
       .catch(() => {
         setUser({});
@@ -35,16 +48,21 @@ function App() {
   return (
     <div className="App">
       {
-        user.email ?
-          <button onClick={HandleGoogleSignOut}>
-            GO OUT GOOGLE
-          </button>
+        user.uid ?
+          <div>
+            <button onClick={HandelSignOut}>
+              SIGN OUT
+            </button>
+          </div>
           :
-          <button onClick={HandeleGoogleSignIn}>GO TO GOOGLE</button>
+          <div>
+            <button onClick={HandeleGoogleSignIn}>SIGN IN GOOGLE</button>
+            <button onClick={HandelGithubSignIn}>GIT-HUB SIGN IN</button>
+          </div>
       }
 
       {
-        user.email &&
+        user.uid &&
         <div>
           <br />
           <img src={user.photoURL} alt="" />

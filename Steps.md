@@ -31,3 +31,11 @@
 13. inside the event gandler , call singInWithPopup with auth , provider .
 
 14. after singInWithPopup .then result , error .
+
+## How to add a new sign in method like google
+
+1. enable the sign in method .
+
+2. create clientid and secret .
+
+3. get clientid and secret.
