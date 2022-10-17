@@ -39,3 +39,13 @@
 2. create clientid and secret .
 
 3. get clientid and secret.
+
+### How to add a normal login and signup syestem
+
+1. "Log in" OR "Sign in" [If already you have a user account created] .
+
+2. "Register" OR "Sign up" [If you dont have any user account created] .
+
+3. get from value:
+set from onSubmitHandler
+set event parameter

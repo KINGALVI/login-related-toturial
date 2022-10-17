@@ -7,6 +7,8 @@ const auth = getAuth(app);
 
 function App() {
 
+  /* How can we use third party authentication for login or regester method*/
+
   const [user, setUser] = useState({})
   const GoogleProvider = new GoogleAuthProvider();
 
@@ -45,8 +47,25 @@ function App() {
       })
   }
 
+  /* How can we use normal authentication for login or regester method*/
+
+  const HandleRegister = (event) => {
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password)
+  }
+
+  const HandelEmailchange = event => {
+    console.log(event.target.value)
+  }
+
+  const HandelPasswordchange = event =>{
+    console.log(event.target.value)
+  }
+
   return (
     <div className="App">
+      {/* How can we use third party authentication for login or regester method*/}
       {
         user.uid ?
           <div>
@@ -69,6 +88,17 @@ function App() {
           <p>User Name : {user.displayName}</p>
         </div>
       }
+      <br />
+      {/* How can we use normal authentication for login or regester method*/}
+      <br />
+      <form onSubmit={HandleRegister}>
+        <input onBlur={HandelEmailchange} type="email" name="email" id="" placeholder="Your Email" />
+        <br />
+        <input onBlur={HandelPasswordchange} type="password" name="password" id="" placeholder='Your Password' />
+        <br />
+        <button type="submit">Register</button>
+      </form>
+
     </div>
   );
 }
