@@ -48,7 +48,7 @@ function App() {
   }
 
   /* How can we use normal authentication for login or regester method*/
-
+  const [PasswordError, setPasswordError] = useState('')
   const HandleRegister = (event) => {
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -61,6 +61,19 @@ function App() {
       .catch(error => {
         console.log('error : ', error)
       })
+    if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
+      setPasswordError('aljdlajf');
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordError('aljdlajf233232424');
+      return;
+    }
+    if (/(?=.*[!@#$%*])/.test(password)) {
+      setPasswordError('a2443423231313131313')
+      return;
+    }
+    setPasswordError('')
   }
 
   const HandelEmailchange = event => {
@@ -100,9 +113,11 @@ function App() {
       {/* How can we use normal authentication for login or regester method*/}
       <br />
       <form onSubmit={HandleRegister}>
-        <input onBlur={HandelEmailchange} type="email" name="email" id="" placeholder="Your Email" required/>
+        <input onBlur={HandelEmailchange} type="email" name="email" id="" placeholder="Your Email" required />
         <br />
-        <input onBlur={HandelPasswordchange} type="password" name="password" id="" placeholder='Your Password' required/>
+        <p>{PasswordError}</p>
+        <br />
+        <input onBlur={HandelPasswordchange} type="password" name="password" id="" placeholder='Your Password' required />
         <br />
         <button type="submit">Register</button>
       </form>
