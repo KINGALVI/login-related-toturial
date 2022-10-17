@@ -1,5 +1,5 @@
 import './App.css';
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut, createUserWithEmailAndPassword } from 'firebase/auth';
 import app from './Firebase/Firebase';
 import { useState } from 'react';
 
@@ -52,14 +52,22 @@ function App() {
   const HandleRegister = (event) => {
     const email = event.target.email.value;
     const password = event.target.password.value;
+    createUserWithEmailAndPassword(auth, email, password)
     console.log(email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user)
+      })
+      .catch(error => {
+        console.log('error : ', error)
+      })
   }
 
   const HandelEmailchange = event => {
     console.log(event.target.value)
   }
 
-  const HandelPasswordchange = event =>{
+  const HandelPasswordchange = event => {
     console.log(event.target.value)
   }
 
@@ -92,9 +100,9 @@ function App() {
       {/* How can we use normal authentication for login or regester method*/}
       <br />
       <form onSubmit={HandleRegister}>
-        <input onBlur={HandelEmailchange} type="email" name="email" id="" placeholder="Your Email" />
+        <input onBlur={HandelEmailchange} type="email" name="email" id="" placeholder="Your Email" required/>
         <br />
-        <input onBlur={HandelPasswordchange} type="password" name="password" id="" placeholder='Your Password' />
+        <input onBlur={HandelPasswordchange} type="password" name="password" id="" placeholder='Your Password' required/>
         <br />
         <button type="submit">Register</button>
       </form>
